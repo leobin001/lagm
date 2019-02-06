@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : localhost
-Source Server Version : 50553
+Source Server         : apache本地
+Source Server Version : 50547
 Source Host           : localhost:3306
 Source Database       : lagm
 
 Target Server Type    : MYSQL
-Target Server Version : 50553
+Target Server Version : 50547
 File Encoding         : 65001
 
-Date: 2019-01-30 21:49:07
+Date: 2019-02-06 17:46:20
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -67,8 +67,9 @@ CREATE TABLE `category` (
   `update_time` int(11) NOT NULL DEFAULT '0' COMMENT '更新时间',
   `status` tinyint(4) NOT NULL DEFAULT '0' COMMENT '0是启用，1是删除',
   PRIMARY KEY (`category_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of category
 -- ----------------------------
+INSERT INTO `category` VALUES ('1', '0', '2014年', '1549445330', '1549445330', '0');

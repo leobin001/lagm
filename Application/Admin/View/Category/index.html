@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{{$global['projectname']}}</title>
+    <meta name="keywords" content="{{$global['projectname']}}">
+    <meta name="description" content="{{$global['projectname']}}">
+    <link rel="shortcut icon" href="favicon.ico">
+    <link href="__PUBLIC__/admin/css/bootstrap.min.css" rel="stylesheet">
+    <link href="__PUBLIC__/admin/css/common.css" rel="stylesheet">
+    <link href="__PUBLIC__/admin/css/font-awesome.min.css" rel="stylesheet">
+    <link href="__PUBLIC__/admin/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+    <link href="__PUBLIC__/admin/css/style.min.css" rel="stylesheet">
+    <link href="__PUBLIC__/admin/css/plugins/blueimp/css/blueimp-gallery.min.css" rel="stylesheet">
+    <script src="__PUBLIC__/admin/js/jquery.min.js?v=2.1.4"></script>
+    <script src="__PUBLIC__/admin/js/bootstrap.min.js?v=3.3.6"></script>
+    <script src="__PUBLIC__/admin/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+    <script src="__PUBLIC__/admin/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+    <script src="__PUBLIC__/admin/js/plugins/layer/layer.min.js"></script>
+</head>
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <link href="__PUBLIC__/admin/css/plugins/blueimp/css/blueimp-gallery.min.css" rel="stylesheet">
+        <div class="ibox float-e-margins">
+            <!-- Start Panel Other -->
+            <div class="ibox-content">
+                <div class="row row-lg">
+                    <div class="col-sm-12">
+
+                        <div id="toolbar">
+                            <a class="btn btn-outline btn-default" href="coupon-couponList-edit.html">
+                                <i class="glyphicon glyphicon-plus" aria-hidden="true"></i>
+                            </a>
+                            <button type="button" class="btn btn-outline btn-default" id="delbtn" data-toggle="modal">
+                                <i class="glyphicon glyphicon-trash" aria-hidden="true"></i>
+                            </button>
+                        </div>
+
+                        <table id="mytab" class="table table-hover"></table>
+
+                    </div>
+                </div>
+            </div>
+            <!-- End Panel Other -->
+        </div>
+        <div id="blueimp-gallery" class="blueimp-gallery">
+            <div class="slides"></div>
+            <h3 class="title"></h3>
+            <a class="prev">
+                <</a>
+            <a class="next">></a>
+            <a class="close">×</a>
+            <a class="play-pause"></a>
+            <ol class="indicator"></ol>
+        </div>
+        <script src="__PUBLIC__/admin/js/inittable.js"></script>
+        <script src="__PUBLIC__/admin/js/plugins/blueimp/jquery.blueimp-gallery.min.js"></script>
+        <script>
+            $(function () {
+                var columns = [{
+                    title: '<input type="checkbox" id="checkboxAll">',
+                    field: "checkbox",
+                    width: 20, //宽度
+
+                    align: "center", //水平
+                    valign: "middle" //垂直
+
+                },
+                    {
+                        title: "序号", //标题
+                        align: "center",
+                        formatter: function (value, row, index) {
+                            return index + 1
+                        }
+                    },
+                    {
+                        title: "目录名",
+                        field: "category_name",
+                        align: "center"
+                    },
+                    {
+                        title: "创建时间",
+                        field: "create_time",
+                        align: "center"
+                    },
+                    {
+                        title: "更新时间",
+                        field: "update_time",
+                        align: "center"
+                    },
+                    {
+                        title: "编辑",
+                        field: "operate",
+                        align: "center"
+                    }
+                ];
+                initTable("#mytab", "{:U('Admin/Category/categoryData')}", columns)
+                //编辑
+                $(document).on('click', '.glyphicon-edit', function () {
+                    var id = $(this).attr('data-id');
+                    window.location.href = "coupon-couponList-edit.html?l=" + id;
+                })
+                //全选
+                $(document).on('click', "#checkboxAll", function () {
+                    if ($(this).is(':checked')) {
+                        $("input[name='checkbox']").prop("checked", true);
+                    } else {
+                        $("input[name='checkbox']").prop("checked", false);
+                    }
+                });
+                //删除当前
+                $(document).on('click', '.col-sm-1>.glyphicon-trash', function () {
+                    var l = $(this).attr('data-id');
+                    layer.confirm('您确定要删除当前记录吗？', {
+                        btn: ['确定', '取消'], //按钮
+                        shade: false //不显示遮罩
+                    }, function () {
+                        $.post('coupon-couponList-del.html', {
+                            l: l
+                        }, function (data) {
+                            if (data['code'] == 1001) {
+                                parent.layer.msg(data.msg, {
+                                    time: 1000
+                                });
+                                $("#mytab").bootstrapTable('refresh')
+                            } else {
+                                parent.layer.msg(data.msg, {
+                                    time: 1500
+                                });
+                            }
+                        }, 'json');
+                    });
+                })
+                //多个选中删除
+                $("#delbtn").click(function () {
+                    var str = "";
+                    var begin = true;
+                    $(":input[type=checkbox][name='checkbox']:checked").each(function () {
+                        if (begin)
+                            str += $(this).val();
+                        else
+                            str += "," + $(this).val();
+                        begin = false;
+                    });
+
+                    if (str.length == 0) {
+                        parent.layer.msg('请选择要删除的记录', {
+                            time: 1000
+                        });
+                        return false;
+                    } else {
+                        parent.layer.confirm('您确定要删除所选的记录吗？', {
+                            btn: ['确定', '取消'], //按钮
+                            shade: false //不显示遮罩
+                        }, function () {
+                            $.post('coupon-couponList-del.html', {
+                                l: str
+                            }, function (data) {
+                                if (data['code'] == 1001) {
+                                    parent.layer.msg(data.msg, {
+                                        time: 1000
+                                    });
+                                    $("#mytab").bootstrapTable('refresh')
+                                } else {
+                                    parent.layer.msg(data.msg, {
+                                        time: 1500
+                                    });
+                                }
+                            }, 'json')
+                        });
+
+                    }
+                });
+            })
+        </script>
+    </div>
+</body>
+</html>
