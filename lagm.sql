@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50547
 File Encoding         : 65001
 
-Date: 2019-02-06 17:46:20
+Date: 2019-02-17 21:21:57
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -67,9 +67,13 @@ CREATE TABLE `category` (
   `update_time` int(11) NOT NULL DEFAULT '0' COMMENT '更新时间',
   `status` tinyint(4) NOT NULL DEFAULT '0' COMMENT '0是启用，1是删除',
   PRIMARY KEY (`category_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of category
 -- ----------------------------
 INSERT INTO `category` VALUES ('1', '0', '2014年', '1549445330', '1549445330', '0');
+INSERT INTO `category` VALUES ('2', '0', '2015年', '1550409575', '1550409575', '0');
+INSERT INTO `category` VALUES ('3', '0', '2016年', '1550409579', '1550409579', '0');
+INSERT INTO `category` VALUES ('4', '0', '2017年', '1550409604', '1550409604', '0');
+INSERT INTO `category` VALUES ('5', '0', '2018年', '1550409618', '1550409618', '0');

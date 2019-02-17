@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{$global['projectname']}}</title>
+    <meta name="keywords" content="{{$global['projectname']}}">
+    <meta name="description" content="{{$global['projectname']}}">
+    <link rel="shortcut icon" href="favicon.ico">
+    <link href="__PUBLIC__/admin/css/bootstrap.min.css" rel="stylesheet">
+    <link href="__PUBLIC__/admin/css/common.css" rel="stylesheet">
+    <link href="__PUBLIC__/admin/css/font-awesome.min.css" rel="stylesheet">
+    <link href="__PUBLIC__/admin/css/style.min.css" rel="stylesheet">
+    <link href="__PUBLIC__/admin/css/validform.css" rel="stylesheet">
+    <script src="__PUBLIC__/admin/js/jquery.min.js?v=2.1.4"></script>
+    <script src="__PUBLIC__/admin/js/bootstrap.min.js?v=3.3.6"></script>
+    <script src="__PUBLIC__/admin/js/plugins/layer/layer.min.js"></script>
+    <script src="__PUBLIC__/admin/js/validform.js"></script>
+</head>
+
+<link href="__PUBLIC__/admin/css/validform.css" rel="stylesheet">
+<link href="__PUBLIC__/admin/css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css" rel="stylesheet">
+<link href="__PUBLIC__/admin/css/plugins/datetimepicker/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+<script src="__PUBLIC__/admin/js/plugins/layer/laydate/laydate.js"></script>
+<script src="__PUBLIC__/admin/js/validform.js"></script>
+<script src="__PUBLIC__/admin/js/plugins/datetimepicker/bootstrap-datetimepicker.min.js"></script>
+
+<div class="col-sm-12">
+    <div class="ibox float-e-margins">
+        <div class="ibox-title">
+            <h5><notempty name="row.id">修改<else />添加</notempty>目录信息</h5>
+        </div>
+        <div class="ibox-content">
+            <form class="form-horizontal m-t edit-form"  method="post">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label"><span class="require-field">*</span>标题：</label>
+                    <div class="col-sm-5">
+                        <input id="category_name" name="category_name" class="form-control" type="text" value="<notempty name='row.category_name'>{$row['category_name']}</notempty>" datatype='*'>
+                    </div>
+                    <div class="Validform_checktip col-sm-2"></div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-8 col-sm-offset-3">
+                        <notempty name="row.id">
+                        <input type="hidden" value='{$row.id}' name='id'/>
+                        </notempty>
+                        <button class="btn btn-primary" type="submit">提交表单</button>
+                        <a class="btn btn-primary" href="{:U('Admin/Category/index')}">返回列表</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $(".edit-form").Validform({
+            tiptype: 2,
+            beforeSubmit: function() {
+                layer.confirm('确定提交信息？', {
+                    btn: ['确定', '取消'],
+                    shade: false
+                }, function() {
+                    var data = $('.edit-form').serialize();
+                    $.ajax({
+                        type: "POST",
+                        url: '{:U("Admin/Category/edit")}',
+                        data: data,
+                        dataType: "json",
+                        success: function(data) {
+                            if (data['code'] == 1001) {
+                                layer.msg(data['msg'], {
+                                    time:1000
+                                }, function() {
+                                    window.location.href = '{:U("Admin/Category/index")}';
+                                });
+                            } else {
+                                layer.msg(data['msg'], {
+                                    time:1000
+                                });
+                                return false;
+                            }
+                        }
+                    });
+                });
+            },
+            callback: function(form) {
+                return false;
+            }
+        });
+
+
+    });
+</script>
+
+</div>
+</body>
+</html>

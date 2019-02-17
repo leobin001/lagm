@@ -32,7 +32,7 @@
                     <div class="col-sm-12">
 
                         <div id="toolbar">
-                            <a class="btn btn-outline btn-default" href="coupon-couponList-edit.html">
+                            <a class="btn btn-outline btn-default" href="{:U('Admin/Category/edit')}">
                                 <i class="glyphicon glyphicon-plus" aria-hidden="true"></i>
                             </a>
                             <button type="button" class="btn btn-outline btn-default" id="delbtn" data-toggle="modal">
@@ -102,7 +102,7 @@
                 //编辑
                 $(document).on('click', '.glyphicon-edit', function () {
                     var id = $(this).attr('data-id');
-                    window.location.href = "coupon-couponList-edit.html?l=" + id;
+                    window.location.href = "{:U('Admin/Category/edit')}" + "?id=" + id;
                 })
                 //全选
                 $(document).on('click', "#checkboxAll", function () {
@@ -119,7 +119,7 @@
                         btn: ['确定', '取消'], //按钮
                         shade: false //不显示遮罩
                     }, function () {
-                        $.post('coupon-couponList-del.html', {
+                        $.post('{:U("Admin/Category/del")}', {
                             l: l
                         }, function (data) {
                             if (data['code'] == 1001) {
@@ -157,7 +157,7 @@
                             btn: ['确定', '取消'], //按钮
                             shade: false //不显示遮罩
                         }, function () {
-                            $.post('coupon-couponList-del.html', {
+                            $.post('{:U("Admin/Category/del")}', {
                                 l: str
                             }, function (data) {
                                 if (data['code'] == 1001) {
