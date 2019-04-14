@@ -12,6 +12,8 @@ class IndexController extends Controller {
             $result = M('admin')->field('id')->where($where)->select();
             if($result) {
                 $this->ajaxReturn(['code' => 1]);
+            } else {
+                $this->ajaxReturn(['code' => 0]);
             }
         }
         $this->display();

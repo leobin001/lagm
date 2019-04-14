@@ -1,25 +1,24 @@
 <?php
 namespace Admin\Controller;
 use Think\Controller;
-class CategoryController extends Controller {
+class ArticleController extends Controller {
     private $_model;
     public function __construct() {
         parent::__construct();
-        $this->_model = M('category');
+        $this->_model = M('article');
     }
 
     public function index(){
         $this->display();
     }
 
-    public function categoryData() {
+    public function articleData() {
         $where = ['status' => 0];
         $total = $this->_model->where($where)->count();
         $rows = [];
         if ($total) {
-            $rows = $this->_model->field('category_id,category_name,create_time,update_time')->where($where)->select();
+            $rows = $this->_model->alias('a')->field('a.article_id,b.category_name,a.category_id,a.title,a.read,a.like,a.update_time')->join('LEFT JOIN category as b on a.category_id = b.category_id')->where(['a.status' => 0])->select();
             foreach ($rows as &$rowVal) {
-                $rowVal['create_time'] = date('Y-m-d H:i:s', $rowVal['create_time']);
                 $rowVal['update_time'] = date('Y-m-d H:i:s', $rowVal['update_time']);
                 $rowVal['checkbox'] = "<input type=checkbox name='checkbox' value='" . base64_encode($rowVal['category_id']) . "'>";
                 $rowVal['operate'] = "<div class='col-sm-1'><span data-id=" . base64_encode($rowVal['category_id']) . " class='glyphicon glyphicon-edit' title='编辑当前'></span></div>";
@@ -55,7 +54,7 @@ class CategoryController extends Controller {
                     'create_time' => time(),
                     'update_time' => time(),
                 ];
-                $result = $this->_model->add($add);
+                $result = $this->categoryModel->add($add);
             }
 
             if ($result) {
@@ -66,11 +65,14 @@ class CategoryController extends Controller {
         }
 
         if (I('get.id')) {
-            $categoryId = base64_decode(I('get.id'));
-            $row = $this->_model->field('category_id, category_name')->where(['category_id' => $categoryId])->find();
-            //dump($row);exit;
+            $articleId = base64_decode(I('get.id'));
+            $row = $this->_model->field('article_id,category_id,title,content')->where(['category_id' => $articleId])->find();
+            //dump($row);
             $this->assign('row', $row);
         }
+
+        $categoryList = M('category')->field('category_id, category_name')->where(['parent_id' => 0,'status' => 0])->select();
+        $this->assign('categoryList', $categoryList);
 
         $this->display();
     }

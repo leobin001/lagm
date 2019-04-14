@@ -26,29 +26,55 @@
 <script src="__PUBLIC__/admin/js/validform.js"></script>
 <script src="__PUBLIC__/admin/js/plugins/datetimepicker/bootstrap-datetimepicker.min.js"></script>
 
+<link href="__PUBLIC__/admin/css/plugins/webuploader/webuploader.css" rel="stylesheet">
+<script src="__PUBLIC__/admin/js/plugins/webuploader/webuploader.min.js"></script>
+<script src="__PUBLIC__/admin/js/upload.js"></script>
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/admin/plugins/wangEditor/css/wangEditor.min.css">
+<script type="text/javascript" src="__PUBLIC__/admin/plugins/wangEditor/js/wangEditor.min.js"></script>
+
 <div class="col-sm-12">
     <div class="ibox float-e-margins">
         <div class="ibox-title">
-            <h5><notempty name="row.id">修改<else />添加</notempty>目录信息</h5>
+            <h5><notempty name="row.id">修改<else />添加</notempty>文章信息</h5>
         </div>
         <div class="ibox-content">
             <form class="form-horizontal m-t edit-form"  method="post">
                 <div class="form-group">
                     <label class="col-sm-2 control-label"><span class="require-field">*</span>标题：</label>
                     <div class="col-sm-5">
-                        <input id="category_name" name="category_name" class="form-control" type="text" value="<notempty name='row.category_name'>{$row['category_name']}</notempty>" datatype='*'>
+                        <input id="category_name" name="category_name" class="form-control" type="text" value="<notempty name='row.title'>{$row['title']}</notempty>" datatype='*'>
                     </div>
                     <div class="Validform_checktip col-sm-2"></div>
                 </div>
                 <div class="form-group">
-                    <div class="col-sm-8 col-sm-offset-3">
-                        <notempty name="row.id">
-                        <input type="hidden" value='{$row.category_id}' name='id'/>
-                        </notempty>
-                        <button class="btn btn-primary" type="submit">提交表单</button>
-                        <a class="btn btn-primary" href="{:U('Admin/Category/index')}">返回列表</a>
+                    <label class="col-sm-2 control-label"><span class="require-field">*</span>所属目录</label>
+                    <div class="col-sm-5">
+                        <select class="form-control" name="show_flag" id="show_flag" datatype="*">
+                            <volist name="categoryList" id="category">
+                                <option value="{$category.category_id}" <php>if ($row['category_id'] == $category['category_id']) { echo 'selected'; }</php> >{$category.category_name}</option>
+                            </volist>>
+                        </select>
+                    </div>
+                    <div class="Validform_checktip col-sm-2"></div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label"><span class="require-field">*</span>文章内容：</label>
+                    <div class="col-sm-10" style="height:500px">
+                            <textarea id="content" name="content" style="height:420px" >
+
+                            </textarea>
                     </div>
                 </div>
+                <div class="form-group">
+                    <div class="col-sm-8 col-sm-offset-3">
+                        <notempty name="row.id">
+                        <input type="hidden" value='{$row.article_id}' name='id'/>
+                        </notempty>
+                        <button class="btn btn-primary" type="submit">提交表单</button>
+                        <a class="btn btn-primary" href="{:U('Admin/Article/index')}">返回列表</a>
+                    </div>
+                </div>
+
             </form>
         </div>
     </div>
@@ -56,6 +82,24 @@
 
 <script>
     $(document).ready(function () {
+        var nowDate = new Date();
+        var year = nowDate.getFullYear();
+        var month=nowDate.getMonth()+1;
+        var day = nowDate.getDate();
+        var timeStr =''+year+month+day;
+
+        // 生成编辑器
+        var textArea = document.getElementById('content');
+        var editor = new wangEditor(textArea);
+        editor.config.uploadImgUrl = '/common-index-uploadImgByEditorV2.html?path=news/detail/'+timeStr;
+        editor.config.uploadHeaders = {
+            'Accept' : 'text/x-json'
+        };
+        editor.config.uploadImgFileName = 'file'
+        editor.config.uploadImgMaxLength = 50;
+        editor.create()
+
+
         $(".edit-form").Validform({
             tiptype: 2,
             beforeSubmit: function() {
