@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50547
 File Encoding         : 65001
 
-Date: 2019-02-17 21:21:57
+Date: 2019-04-15 22:59:34
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -49,11 +49,13 @@ CREATE TABLE `article` (
   `update_time` int(11) NOT NULL DEFAULT '0' COMMENT '更新时间',
   `status` tinyint(4) NOT NULL DEFAULT '0' COMMENT '0是启用，1是删除',
   PRIMARY KEY (`article_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of article
 -- ----------------------------
+INSERT INTO `article` VALUES ('1', '2', 'first time', '                                                            &lt;p&gt;&lt;b&gt;你好，宝可梦&lt;/b&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;', '1', '2', '1550409618', '1555339558', '0');
+INSERT INTO `article` VALUES ('2', '0', '', '                                                            &lt;p&gt;&lt;b&gt;你好旧时光&lt;/b&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;', '0', '0', '1555339287', '1555339287', '0');
 
 -- ----------------------------
 -- Table structure for category
@@ -67,7 +69,7 @@ CREATE TABLE `category` (
   `update_time` int(11) NOT NULL DEFAULT '0' COMMENT '更新时间',
   `status` tinyint(4) NOT NULL DEFAULT '0' COMMENT '0是启用，1是删除',
   PRIMARY KEY (`category_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of category
@@ -77,3 +79,4 @@ INSERT INTO `category` VALUES ('2', '0', '2015年', '1550409575', '1550409575', 
 INSERT INTO `category` VALUES ('3', '0', '2016年', '1550409579', '1550409579', '0');
 INSERT INTO `category` VALUES ('4', '0', '2017年', '1550409604', '1550409604', '0');
 INSERT INTO `category` VALUES ('5', '0', '2018年', '1550409618', '1550409618', '0');
+INSERT INTO `category` VALUES ('6', '0', 'first time', '1555339121', '1555339121', '0');

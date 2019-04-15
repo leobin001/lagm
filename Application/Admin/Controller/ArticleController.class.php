@@ -39,11 +39,12 @@ class ArticleController extends Controller {
             if ($post['id']) {
                 //修改
                 $where = [
-                    'category_id' => $post['id'],
+                    'article_id' => $post['id'],
                     'status' => 0
                 ];
                 $save = [
                     'category_name'=>$post['category_name'],
+                    'content' => $post['content'],
                     'update_time'=>time()
                 ];
                 $result = $this->_model->where($where)->save($save);
@@ -53,8 +54,9 @@ class ArticleController extends Controller {
                     'category_name' => $post['category_name'],
                     'create_time' => time(),
                     'update_time' => time(),
+                    'content' => $post['content'],
                 ];
-                $result = $this->categoryModel->add($add);
+                $result = $this->_model->add($add);
             }
 
             if ($result) {
@@ -67,6 +69,7 @@ class ArticleController extends Controller {
         if (I('get.id')) {
             $articleId = base64_decode(I('get.id'));
             $row = $this->_model->field('article_id,category_id,title,content')->where(['category_id' => $articleId])->find();
+            $row['content'] = htmlspecialchars_decode($row['content']);
             //dump($row);
             $this->assign('row', $row);
         }

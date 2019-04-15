@@ -42,14 +42,14 @@
                 <div class="form-group">
                     <label class="col-sm-2 control-label"><span class="require-field">*</span>标题：</label>
                     <div class="col-sm-5">
-                        <input id="category_name" name="category_name" class="form-control" type="text" value="<notempty name='row.title'>{$row['title']}</notempty>" datatype='*'>
+                        <input id="title" name="title" class="form-control" type="text" value="<notempty name='row.title'>{$row['title']}</notempty>" datatype='*'>
                     </div>
                     <div class="Validform_checktip col-sm-2"></div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-2 control-label"><span class="require-field">*</span>所属目录</label>
                     <div class="col-sm-5">
-                        <select class="form-control" name="show_flag" id="show_flag" datatype="*">
+                        <select class="form-control" name="category_id" id="category_id" datatype="*">
                             <volist name="categoryList" id="category">
                                 <option value="{$category.category_id}" <php>if ($row['category_id'] == $category['category_id']) { echo 'selected'; }</php> >{$category.category_name}</option>
                             </volist>>
@@ -61,13 +61,13 @@
                     <label class="col-sm-2 control-label"><span class="require-field">*</span>文章内容：</label>
                     <div class="col-sm-10" style="height:500px">
                             <textarea id="content" name="content" style="height:420px" >
-
+                                <notempty name='row.content'>{$row['content']}</notempty>
                             </textarea>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-sm-8 col-sm-offset-3">
-                        <notempty name="row.id">
+                        <notempty name="row.article_id">
                         <input type="hidden" value='{$row.article_id}' name='id'/>
                         </notempty>
                         <button class="btn btn-primary" type="submit">提交表单</button>
@@ -91,13 +91,13 @@
         // 生成编辑器
         var textArea = document.getElementById('content');
         var editor = new wangEditor(textArea);
-        editor.config.uploadImgUrl = '/common-index-uploadImgByEditorV2.html?path=news/detail/'+timeStr;
+        editor.config.uploadImgUrl = '__PUBLIC__/uploadImg/' + timeStr;
         editor.config.uploadHeaders = {
             'Accept' : 'text/x-json'
         };
         editor.config.uploadImgFileName = 'file'
         editor.config.uploadImgMaxLength = 50;
-        editor.create()
+        editor.create();
 
 
         $(".edit-form").Validform({
@@ -110,7 +110,7 @@
                     var data = $('.edit-form').serialize();
                     $.ajax({
                         type: "POST",
-                        url: '{:U("Admin/Category/edit")}',
+                        url: '{:U("Admin/Article/edit")}',
                         data: data,
                         dataType: "json",
                         success: function(data) {
@@ -118,7 +118,7 @@
                                 layer.msg(data['msg'], {
                                     time:1000
                                 }, function() {
-                                    window.location.href = '{:U("Admin/Category/index")}';
+                                    window.location.href = '{:U("Admin/Article/index")}';
                                 });
                             } else {
                                 layer.msg(data['msg'], {
