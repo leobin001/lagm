@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : apache本地
-Source Server Version : 50547
+Source Server         : 本地
+Source Server Version : 50714
 Source Host           : localhost:3306
 Source Database       : lagm
 
 Target Server Type    : MYSQL
-Target Server Version : 50547
+Target Server Version : 50714
 File Encoding         : 65001
 
-Date: 2019-04-15 22:59:34
+Date: 2019-04-16 17:19:36
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -54,8 +54,8 @@ CREATE TABLE `article` (
 -- ----------------------------
 -- Records of article
 -- ----------------------------
-INSERT INTO `article` VALUES ('1', '2', 'first time', '                                                            &lt;p&gt;&lt;b&gt;你好，宝可梦&lt;/b&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;', '1', '2', '1550409618', '1555339558', '0');
-INSERT INTO `article` VALUES ('2', '0', '', '                                                            &lt;p&gt;&lt;b&gt;你好旧时光&lt;/b&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;', '0', '0', '1555339287', '1555339287', '0');
+INSERT INTO `article` VALUES ('1', '2', 'first time', '                                                                                            &lt;p&gt;&lt;b&gt;你好&lt;/b&gt;&lt;/p&gt;&lt;p&gt;&lt;img src=&quot;http://lagm.com/Public/uploadImg/2019416/201904161709386701765.jpg&quot; alt=&quot;default&quot; style=&quot;max-width:100%;&quot;&gt;&lt;br&gt;&lt;/p&gt;                            &lt;p&gt;&lt;br&gt;&lt;/p&gt;', '1', '2', '1550409618', '1555405780', '0');
+INSERT INTO `article` VALUES ('2', '4', '666', '                                                                                                                            &lt;p&gt;呃呃呃&lt;/p&gt;                                                        ', '0', '0', '1555339287', '1555406153', '0');
 
 -- ----------------------------
 -- Table structure for category

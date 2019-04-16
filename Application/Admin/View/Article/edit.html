@@ -91,11 +91,11 @@
         // 生成编辑器
         var textArea = document.getElementById('content');
         var editor = new wangEditor(textArea);
-        editor.config.uploadImgUrl = '__PUBLIC__/uploadImg/' + timeStr;
+        editor.config.uploadImgUrl = "{:U('Admin/Public/uploadImgByEditor')}" + '?path=Public/uploadImg/' + timeStr;
         editor.config.uploadHeaders = {
             'Accept' : 'text/x-json'
         };
-        editor.config.uploadImgFileName = 'file'
+        editor.config.uploadImgFileName = 'file';
         editor.config.uploadImgMaxLength = 50;
         editor.create();
 

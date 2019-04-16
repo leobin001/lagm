@@ -36,27 +36,23 @@ class ArticleController extends Controller {
     public function edit() {
         if (IS_POST) {
             $post = I('post.');
+            $data = [
+                'category_id'=>$post['category_id'],
+                'title'=>$post['title'],
+                'content' => $post['content'],
+                'update_time'=>time()
+            ];
             if ($post['id']) {
                 //修改
                 $where = [
                     'article_id' => $post['id'],
                     'status' => 0
                 ];
-                $save = [
-                    'category_name'=>$post['category_name'],
-                    'content' => $post['content'],
-                    'update_time'=>time()
-                ];
-                $result = $this->_model->where($where)->save($save);
+                $result = $this->_model->where($where)->save($data);
             } else {
                 //新增
-                $add = [
-                    'category_name' => $post['category_name'],
-                    'create_time' => time(),
-                    'update_time' => time(),
-                    'content' => $post['content'],
-                ];
-                $result = $this->_model->add($add);
+                $data['create_time'] = time();
+                $result = $this->_model->add($data);
             }
 
             if ($result) {
