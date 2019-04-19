@@ -46,6 +46,25 @@
                     </div>
                     <div class="Validform_checktip col-sm-2"></div>
                 </div>
+                <div class="form-group c-m-b">
+                    <label class="col-sm-2 control-label"><span class="require-field">*</span>封面图：</label>
+                    <div class="col-sm-5">
+                        <div id="uploader1" class="webuploader">
+                            <div id="fileList1" class="uploader-list" >
+                                <notempty name='row.list_pic'>
+                                    <div id="Wk_FILEi_1" class="file-item thumbnail upload-state-done">
+                                        <img src="{$row['list_pic']}" width="100px" height="100px;">
+                                        <div class="info"></div>
+                                        <div class="file-panel" arc="{$row['list_pic']}" style="height: 25px;"><span class="cancel1">删除</span>
+                                        </div>
+                                    </div>
+                                </notempty>
+                            </div>
+                            <div id="filePicker1" >选择图片</div>
+                        </div>
+                        <input type="hidden"  name="list_pic" id="list_pic" value="<notempty name='row.list_pic'>{$row['list_pic']}</notempty>" >
+                    </div>
+                </div>
                 <div class="form-group">
                     <label class="col-sm-2 control-label"><span class="require-field">*</span>所属目录</label>
                     <div class="col-sm-5">
@@ -88,10 +107,13 @@
         var day = nowDate.getDate();
         var timeStr =''+year+month+day;
 
+        //图片上传
+        createUpload(1,"#list_pic",1, "{:U('Admin/Public/uploadImg')}" + "?path=Public/uploadListImg/" + timeStr);
+
         // 生成编辑器
         var textArea = document.getElementById('content');
         var editor = new wangEditor(textArea);
-        editor.config.uploadImgUrl = "{:U('Admin/Public/uploadImgByEditor')}" + '?path=Public/uploadImg/' + timeStr;
+        editor.config.uploadImgUrl = "{:U('Admin/Public/uploadImgByEditor')}" + '?path=Public/uploadArticleImg/' + timeStr;
         editor.config.uploadHeaders = {
             'Accept' : 'text/x-json'
         };

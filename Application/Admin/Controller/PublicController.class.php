@@ -11,6 +11,9 @@ use Think\Controller;
 
 class PublicController extends Controller
 {
+    /**
+     * 编辑器图片上传
+     */
     public function uploadImgByEditor(){
         $path = $_GET['path'];
         $data = ['errno'=>0];
@@ -30,6 +33,29 @@ class PublicController extends Controller
             echo  "error|上传错误";exit;
         }
 
+    }
+
+    /**
+     * 图片上传
+     */
+    public function uploadImg()
+    {
+        $path = !empty($_GET['path'])?$_GET['path']:$_POST['path'];
+        $data = ['code'=>1001];
+        if (empty($_FILES['file']) || empty($path)) {
+            $data['code'] = -1;
+            echo json_encode($data);exit();
+        }
+        $dir = $path . "/";
+        //$dir = func::simplifyDir($dir);
+        $upload  = $this->fileUpload($_FILES['file'],['ext'=>'png|gif|jpg|','size'=>'2m'],$dir,true);
+        if ($upload['url']) {
+            $data['data'] = $upload['url'];
+        } else {
+            $data['code'] = -2;
+            $data['error'] = $upload;
+        }
+        echo json_encode($data);exit();
     }
 
     /**

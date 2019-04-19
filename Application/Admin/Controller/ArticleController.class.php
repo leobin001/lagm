@@ -39,6 +39,7 @@ class ArticleController extends Controller {
             $data = [
                 'category_id'=>$post['category_id'],
                 'title'=>$post['title'],
+                'list_pic'=>$post['list_pic'],
                 'content' => $post['content'],
                 'update_time'=>time()
             ];
@@ -64,7 +65,8 @@ class ArticleController extends Controller {
 
         if (I('get.id')) {
             $articleId = base64_decode(I('get.id'));
-            $row = $this->_model->field('article_id,category_id,title,content')->where(['category_id' => $articleId])->find();
+            $row = $this->_model->field('article_id,category_id,title,list_pic,content')->where(['category_id' => $articleId])->find();
+            $row['list_pic'] = 'http://'. $_SERVER['HTTP_HOST'] . '/' . $row['list_pic'];
             $row['content'] = htmlspecialchars_decode($row['content']);
             //dump($row);
             $this->assign('row', $row);

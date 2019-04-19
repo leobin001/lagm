@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50714
 File Encoding         : 65001
 
-Date: 2019-04-16 17:19:36
+Date: 2019-04-19 14:53:51
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -42,6 +42,7 @@ CREATE TABLE `article` (
   `article_id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'id',
   `category_id` int(11) NOT NULL DEFAULT '0',
   `title` varchar(100) NOT NULL DEFAULT '' COMMENT '文章标题',
+  `list_pic` varchar(255) NOT NULL DEFAULT '' COMMENT '列表图片',
   `content` text NOT NULL COMMENT '文章内容，富文本',
   `read` int(11) NOT NULL DEFAULT '0' COMMENT '阅读数',
   `like` int(11) NOT NULL DEFAULT '0' COMMENT '点赞数',
@@ -54,8 +55,8 @@ CREATE TABLE `article` (
 -- ----------------------------
 -- Records of article
 -- ----------------------------
-INSERT INTO `article` VALUES ('1', '2', 'first time', '                                                                                            &lt;p&gt;&lt;b&gt;你好&lt;/b&gt;&lt;/p&gt;&lt;p&gt;&lt;img src=&quot;http://lagm.com/Public/uploadImg/2019416/201904161709386701765.jpg&quot; alt=&quot;default&quot; style=&quot;max-width:100%;&quot;&gt;&lt;br&gt;&lt;/p&gt;                            &lt;p&gt;&lt;br&gt;&lt;/p&gt;', '1', '2', '1550409618', '1555405780', '0');
-INSERT INTO `article` VALUES ('2', '4', '666', '                                                                                                                            &lt;p&gt;呃呃呃&lt;/p&gt;                                                        ', '0', '0', '1555339287', '1555406153', '0');
+INSERT INTO `article` VALUES ('1', '2', 'first time', 'Public/uploadListImg/2019419/201904191452573670611.jpg', '                                                                                                                                                                                                                            &lt;p&gt;&lt;br&gt;&lt;/p&gt;                            &lt;p&gt;你好&lt;/p&gt;&lt;p&gt;&lt;img src=&quot;http://lagm.com/Public/uploadArticleImg/2019419/201904191345059454841.jpg&quot; alt=&quot;default&quot; style=&quot;max-width:100%;&quot;&gt;&lt;br&gt;&lt;/p&gt;                            &lt;p&gt;&lt;br&gt;&lt;/p&gt;                                                                                    ', '1', '2', '1550409618', '1555656779', '0');
+INSERT INTO `article` VALUES ('2', '4', '666', '', '                                                                                                                            &lt;p&gt;呃呃呃&lt;/p&gt;                                                        ', '0', '0', '1555339287', '1555406153', '0');
 
 -- ----------------------------
 -- Table structure for category
