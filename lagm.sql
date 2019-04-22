@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50714
 File Encoding         : 65001
 
-Date: 2019-04-19 14:53:51
+Date: 2019-04-22 14:50:54
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -50,13 +50,15 @@ CREATE TABLE `article` (
   `update_time` int(11) NOT NULL DEFAULT '0' COMMENT '更新时间',
   `status` tinyint(4) NOT NULL DEFAULT '0' COMMENT '0是启用，1是删除',
   PRIMARY KEY (`article_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of article
 -- ----------------------------
-INSERT INTO `article` VALUES ('1', '2', 'first time', 'Public/uploadListImg/2019419/201904191452573670611.jpg', '                                                                                                                                                                                                                            &lt;p&gt;&lt;br&gt;&lt;/p&gt;                            &lt;p&gt;你好&lt;/p&gt;&lt;p&gt;&lt;img src=&quot;http://lagm.com/Public/uploadArticleImg/2019419/201904191345059454841.jpg&quot; alt=&quot;default&quot; style=&quot;max-width:100%;&quot;&gt;&lt;br&gt;&lt;/p&gt;                            &lt;p&gt;&lt;br&gt;&lt;/p&gt;                                                                                    ', '1', '2', '1550409618', '1555656779', '0');
-INSERT INTO `article` VALUES ('2', '4', '666', '', '                                                                                                                            &lt;p&gt;呃呃呃&lt;/p&gt;                                                        ', '0', '0', '1555339287', '1555406153', '0');
+INSERT INTO `article` VALUES ('1', '2', 'first time', 'Public/uploadListImg/2019422/201904221057326655514.jpg', '                                                                                                                                                                                                                                                            &lt;p&gt;&lt;br&gt;&lt;/p&gt;                            &lt;p&gt;你好&lt;/p&gt;&lt;p&gt;&lt;img src=&quot;http://lagm.com/Public/uploadArticleImg/2019419/201904191345059454841.jpg&quot; alt=&quot;default&quot; style=&quot;max-width:100%;&quot;&gt;&lt;br&gt;&lt;/p&gt;                            &lt;p&gt;&lt;br&gt;&lt;/p&gt;                                                                                                                ', '1', '2', '1550409618', '1555901855', '0');
+INSERT INTO `article` VALUES ('2', '2', '666', 'Public/uploadListImg/2019422/201904221057411350277.jpg', '                                                                                                                                                                                                                                                                                            &lt;p&gt;呃呃呃&lt;/p&gt;                                                                                                                                                                                                    ', '0', '0', '1555339287', '1555901863', '0');
+INSERT INTO `article` VALUES ('3', '2', 'test', 'Public/uploadListImg/2019422/201904221057496826120.jpg', '                                                                                                                                                            &lt;p&gt;&lt;b&gt;hello world&lt;/b&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;                                                                                    ', '0', '0', '1555893314', '1555901871', '0');
+INSERT INTO `article` VALUES ('4', '2', 'good luck', 'Public/uploadListImg/2019422/20190422105757362649.jpg', '                                                                                                                                                                                                                            &lt;p&gt;&lt;b&gt;&lt;i style=&quot;&quot;&gt;发士大夫士大夫士大夫&lt;/i&gt;&lt;/b&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;                                                                                                                                            ', '0', '0', '1555893353', '1555901879', '0');
 
 -- ----------------------------
 -- Table structure for category
@@ -75,9 +77,9 @@ CREATE TABLE `category` (
 -- ----------------------------
 -- Records of category
 -- ----------------------------
-INSERT INTO `category` VALUES ('1', '0', '2014年', '1549445330', '1549445330', '0');
-INSERT INTO `category` VALUES ('2', '0', '2015年', '1550409575', '1550409575', '0');
-INSERT INTO `category` VALUES ('3', '0', '2016年', '1550409579', '1550409579', '0');
-INSERT INTO `category` VALUES ('4', '0', '2017年', '1550409604', '1550409604', '0');
+INSERT INTO `category` VALUES ('1', '0', '雷系', '1549445330', '1549445330', '0');
+INSERT INTO `category` VALUES ('2', '0', '火系', '1550409575', '1550409575', '0');
+INSERT INTO `category` VALUES ('3', '0', '水系', '1550409579', '1550409579', '0');
+INSERT INTO `category` VALUES ('4', '0', '草系', '1550409604', '1550409604', '0');
 INSERT INTO `category` VALUES ('5', '0', '2018年', '1550409618', '1550409618', '0');
 INSERT INTO `category` VALUES ('6', '0', 'first time', '1555339121', '1555339121', '0');
