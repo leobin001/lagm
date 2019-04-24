@@ -98,7 +98,7 @@
                     <volist name="articleList" id="article">
                         <div class="col-sm-3 col-lg-6 col-xl-3 featured-responsive">
                             <div class="featured-place-wrap">
-                                <a href="detail.html">
+                                <a href="{:U('Home/Index/detail', array('article_id' => $article['article_id']))}">
                                     <img src="{$article.list_pic}" class="img-fluid" alt="#">
                                     <!--<span class="featured-rating-orange ">6.5</span>-->
                                     <div class="featured-title-box">
@@ -233,28 +233,7 @@
     </div>
 </section>
 <!--//END DETAIL -->
-<!--============================= FOOTER =============================-->
-<footer class="main-block dark-bg">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="copyright">
-
-                    <p>Copyright &copy; 2018 Listing. All rights reserved | made with Colorlib - More Templates <a
-                            href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a
-                            href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a></p>
-
-                    <ul>
-                        <li><a href="#"><span class="ti-facebook"></span></a></li>
-                        <li><a href="#"><span class="ti-twitter-alt"></span></a></li>
-                        <li><a href="#"><span class="ti-instagram"></span></a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-</footer>
-<!--//END FOOTER -->
+<include file="Public/footer" />
 
 
 <!-- jQuery, Bootstrap JS. -->

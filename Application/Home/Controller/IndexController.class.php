@@ -11,7 +11,7 @@ class IndexController extends Controller {
 
     public function articleList() {
         $categoryId = I('get.category_id');
-        $articleList = M('article')->field('article_id, title, list_pic, read, like, update_time')->where(array('status'=>0, 'category_id'=>$categoryId))->select();
+        $articleList = M('article')->field('article_id, title, list_pic, read_count, like_count, update_time')->where(array('status'=>0, 'category_id'=>$categoryId))->select();
         foreach ($articleList as &$article) {
             $article['list_pic'] = 'http://'. $_SERVER['HTTP_HOST'] . '/' . $article['list_pic'];
         }
@@ -22,6 +22,18 @@ class IndexController extends Controller {
     }
 
     public function detail() {
+        $articleId = I('get.article_id');
+        $articleModel = M('article');
+        $where = array('status' => 0, 'article_id' => $articleId);
+
+        $articleModel->where($where)->setInc('read_count');
+
+        $article = $articleModel->field('title, content, read_count, update_time')->where($where)->find();
+        $article['update_time'] = date('Y-m-d H:i:s', $article['update_time']);
+        $article['content'] = htmlspecialchars_decode($article['content']);
+
+        $this->assign('article', $article);
+
         $this->getCategoryList();
         $this->display();
     }

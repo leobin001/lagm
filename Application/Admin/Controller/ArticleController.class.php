@@ -17,7 +17,7 @@ class ArticleController extends Controller {
         $total = $this->_model->where($where)->count();
         $rows = [];
         if ($total) {
-            $rows = $this->_model->alias('a')->field('a.article_id,b.category_name,a.category_id,a.title,a.read,a.like,a.update_time')->join('LEFT JOIN category as b on a.category_id = b.category_id')->where(['a.status' => 0])->select();
+            $rows = $this->_model->alias('a')->field('a.article_id,b.category_name,a.category_id,a.title,a.read_count,a.like_count,a.update_time')->join('LEFT JOIN category as b on a.category_id = b.category_id')->where(['a.status' => 0])->select();
             foreach ($rows as &$rowVal) {
                 $rowVal['update_time'] = date('Y-m-d H:i:s', $rowVal['update_time']);
                 $rowVal['checkbox'] = "<input type=checkbox name='checkbox' value='" . base64_encode($rowVal['article_id']) . "'>";
