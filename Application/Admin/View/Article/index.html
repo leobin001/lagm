@@ -112,7 +112,7 @@
                 //编辑
                 $(document).on('click', '.glyphicon-edit', function () {
                     var id = $(this).attr('data-id');
-                    window.location.href = "{:U('Admin/Article/edit')}" + "?id=" + id;
+                    window.location.href = "{:U('Admin/Article/edit')}" + "&id=" + id;
                 })
                 //全选
                 $(document).on('click', "#checkboxAll", function () {

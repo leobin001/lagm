@@ -108,12 +108,12 @@
         var timeStr =''+year+month+day;
 
         //图片上传
-        createUpload(1,"#list_pic",1, "{:U('Admin/Public/uploadImg')}" + "?path=Public/uploadListImg/" + timeStr);
+        createUpload(1,"#list_pic",1, "{:U('Admin/Public/uploadImg')}" + "&path=Public/uploadListImg/" + timeStr);
 
         // 生成编辑器
         var textArea = document.getElementById('content');
         var editor = new wangEditor(textArea);
-        editor.config.uploadImgUrl = "{:U('Admin/Public/uploadImgByEditor')}" + '?path=Public/uploadArticleImg/' + timeStr;
+        editor.config.uploadImgUrl = "{:U('Admin/Public/uploadImgByEditor')}" + '&path=Public/uploadArticleImg/' + timeStr;
         editor.config.uploadHeaders = {
             'Accept' : 'text/x-json'
         };

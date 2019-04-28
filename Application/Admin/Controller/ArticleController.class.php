@@ -46,7 +46,7 @@ class ArticleController extends Controller {
             if ($post['id']) {
                 //修改
                 $where = array(
-                    'article_id' => base64_decode($post['id']),
+                    'article_id' => $post['id'],
                     'status' => 0
                 );
 
@@ -69,7 +69,7 @@ class ArticleController extends Controller {
             $row = $this->_model->field('article_id,category_id,title,list_pic,content')->where(array('article_id' => $articleId))->find();
             $row['show_list_pic'] = 'http://'. $_SERVER['HTTP_HOST'] . '/' . $row['list_pic'];
             $row['content'] = htmlspecialchars_decode($row['content']);
-            $row['article_id'] = base64_encode($row['article_id']);
+            //$row['article_id'] = base64_encode($row['article_id']);
             //dump($row);
             $this->assign('row', $row);
         }
